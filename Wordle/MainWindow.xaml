@@ -32,14 +32,19 @@
         </DataTemplate>
     </Window.Resources>
 
-    <StackPanel>
-        <ItemsControl ItemsSource="{Binding Guesses}" ItemTemplate="{StaticResource guessTemplate}"
+    <StackPanel DataContext="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:MainWindow}}}" Margin="10">
+        <StackPanel Orientation="Horizontal">
+            <TextBlock>Word length:</TextBlock>
+            <Slider Minimum="3" Maximum="7" Value="{Binding Settings.WordLength}" Width="100" Margin="10,0"/>
+            <TextBlock Text="{Binding Settings.WordLength}"/>
+            <Button Click="Button_Click" Margin="20,0,0,0">New Game</Button>
+        </StackPanel>
+        <ItemsControl ItemsSource="{Binding Game.Guesses}" ItemTemplate="{StaticResource guessTemplate}"
                   HorizontalAlignment="Center" VerticalAlignment="Center">
         </ItemsControl>
         <TextBlock>
             <Run>Answer:</Run>
-            <Run Text="{Binding Answer, Mode=OneTime}"/>
+            <Run Text="{Binding Game.Answer, Mode=OneWay}"/>
         </TextBlock>
-        <Button Click="Button_Click">New Game</Button>
     </StackPanel>
 </Window>

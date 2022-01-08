@@ -23,11 +23,29 @@ namespace Wordle
         public MainWindow()
         {
             InitializeComponent();
+
+            Settings = new Settings();
         }
+
+        public Game Game
+        {
+            get { return (Game)GetValue(GameProperty); }
+            set { SetValue(GameProperty, value); }
+        }
+
+        public static readonly DependencyProperty GameProperty = DependencyProperty.Register("Game", typeof(Game), typeof(MainWindow), new PropertyMetadata(null));
+
+        public Settings Settings
+        {
+            get { return (Settings)GetValue(SettingsProperty); }
+            set { SetValue(SettingsProperty, value); }
+        }
+
+        public static readonly DependencyProperty SettingsProperty = DependencyProperty.Register("Settings", typeof(Settings), typeof(MainWindow), new PropertyMetadata(null));
 
         private void NewGame()
         {
-            DataContext = new Game(ChooseWord.OfLength(4));
+            Game = new Game(ChooseWord.OfLength(Settings.WordLength));
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
