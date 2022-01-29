@@ -7,22 +7,20 @@ using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Media;
 
-namespace Wordle
+namespace Wordle.Converters
 {
-    public class LetterStatusToBackgroundConverter : IValueConverter
+    public class LetterStatusToForegroundConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            switch(value)
+            switch (value)
             {
                 case LetterStatus.NotSubmitted:
-                    return Brushes.GhostWhite;
+                    return Brushes.Black;
                 case LetterStatus.NotInWord:
-                    return Brushes.Gray;
                 case LetterStatus.InWrongPlace:
-                    return Brushes.Goldenrod;
                 case LetterStatus.InRightPlace:
-                    return Brushes.LimeGreen;
+                    return Brushes.White;
                 default:
                     return Brushes.Black;
             }

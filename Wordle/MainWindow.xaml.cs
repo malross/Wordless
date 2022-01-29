@@ -24,7 +24,7 @@ namespace Wordle
         {
             InitializeComponent();
 
-            Settings = new Settings();
+            GameSettings = new GameSettings();
         }
 
         public Game Game
@@ -35,22 +35,27 @@ namespace Wordle
 
         public static readonly DependencyProperty GameProperty = DependencyProperty.Register("Game", typeof(Game), typeof(MainWindow), new PropertyMetadata(null));
 
-        public Settings Settings
+        public GameSettings GameSettings
         {
-            get { return (Settings)GetValue(SettingsProperty); }
+            get { return (GameSettings)GetValue(SettingsProperty); }
             set { SetValue(SettingsProperty, value); }
         }
 
-        public static readonly DependencyProperty SettingsProperty = DependencyProperty.Register("Settings", typeof(Settings), typeof(MainWindow), new PropertyMetadata(null));
+        public static readonly DependencyProperty SettingsProperty = DependencyProperty.Register("Settings", typeof(GameSettings), typeof(MainWindow), new PropertyMetadata(null));
 
         private void NewGame()
         {
-            Game = new Game(ChooseWord.OfLength(Settings.WordLength));
+            Game = new Game(GameSettings);
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void NewGame_Click(object sender, RoutedEventArgs e)
         {
             NewGame();
+        }
+
+        private void Guess_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

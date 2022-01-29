@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace Wordle
 {
-    public class Settings
+    public class GameSettings
     {
         public int WordLength { get; set; } = 5;
+        public WordList WordList = WordList.MIT;
     }
 }
