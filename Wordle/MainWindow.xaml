@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Wordle"
         mc:Ignorable="d"
-        Title="Wordle" Height="450" Width="400">
+        Title="Wordle∞" Height="525" Width="400">
     <Window.Resources>
         <local:LetterStatusToBackgroundConverter x:Key="statusToBackgroundConverter"/>
         <local:LetterStatusToForegroundConverter x:Key="statusToForegroundConverter"/>
@@ -32,19 +32,32 @@
         </DataTemplate>
     </Window.Resources>
 
-    <StackPanel DataContext="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:MainWindow}}}" Margin="10">
-        <StackPanel Orientation="Horizontal">
-            <TextBlock>Word length:</TextBlock>
-            <Slider Minimum="3" Maximum="7" Value="{Binding Settings.WordLength}" Width="100" Margin="10,0"/>
-            <TextBlock Text="{Binding Settings.WordLength}"/>
-            <Button Click="Button_Click" Margin="20,0,0,0">New Game</Button>
+    <DockPanel DataContext="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:MainWindow}}}" LastChildFill="True" Margin="10">
+        <StackPanel DockPanel.Dock="Top">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock>Word length:</TextBlock>
+                <Slider Minimum="3" Maximum="7" Value="{Binding Settings.WordLength}" Width="100" Margin="10,0"/>
+                <TextBlock Text="{Binding Settings.WordLength}"/>
+                <Button Click="Button_Click" Margin="20,0,0,0">New Game</Button>
+            </StackPanel>
+            <TextBlock HorizontalAlignment="Center" FontFamily="Cooper Black" FontSize="48pt" Foreground="LimeGreen">
+                <Run>Wordle</Run><Run BaselineAlignment="TextTop" FontSize="36pt">∞</Run>
+            </TextBlock>
         </StackPanel>
-        <ItemsControl ItemsSource="{Binding Game.Guesses}" ItemTemplate="{StaticResource guessTemplate}"
+        <StackPanel DockPanel.Dock="Bottom">
+            <TextBlock Visibility="Collapsed">
+                <Run>Answer:</Run>
+                <Run Text="{Binding Game.Answer, Mode=OneWay}"/>
+            </TextBlock>
+            <DockPanel LastChildFill="True" TextElement.FontSize="24pt">
+                <Button DockPanel.Dock="Right">Guess</Button>
+                <TextBox TextAlignment="Center" Text="{Binding Guess}" TextElement.FontStretch="UltraExpanded"/>
+            </DockPanel>
+        </StackPanel>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0,10">
+            <ItemsControl ItemsSource="{Binding Game.Guesses}" ItemTemplate="{StaticResource guessTemplate}"
                   HorizontalAlignment="Center" VerticalAlignment="Center">
-        </ItemsControl>
-        <TextBlock>
-            <Run>Answer:</Run>
-            <Run Text="{Binding Game.Answer, Mode=OneWay}"/>
-        </TextBlock>
-    </StackPanel>
+            </ItemsControl>
+        </ScrollViewer>
+    </DockPanel>
 </Window>
