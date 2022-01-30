@@ -33,7 +33,7 @@
         </DataTemplate>
     </Window.Resources>
 
-    <DockPanel DataContext="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:MainWindow}}}" LastChildFill="True" Margin="10">
+    <DockPanel DataContext="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:MainWindow}}}" Margin="10">
         <StackPanel DockPanel.Dock="Top">
             <StackPanel Orientation="Horizontal">
                 <TextBlock>Word length:</TextBlock>
@@ -45,27 +45,25 @@
                 <Run Foreground="LimeGreen">Wordle</Run><Run Foreground="Gray">ss</Run>
             </TextBlock>
         </StackPanel>
-        <StackPanel DockPanel.Dock="Bottom">
-            <StackPanel.Style>
-                <Style TargetType="StackPanel">
+        <DockPanel TextElement.FontSize="24pt" DockPanel.Dock="Bottom">
+            <DockPanel.Style>
+                <Style TargetType="DockPanel">
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding Game}" Value="{x:Null}">
                             <Setter Property="Visibility" Value="Collapsed"/>
                         </DataTrigger>
+                        <DataTrigger Binding="{Binding Game.IsInProgress}" Value="False">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </DataTrigger>
                     </Style.Triggers>
                 </Style>
-            </StackPanel.Style>
-            <TextBlock Visibility="Collapsed">
-                <Run>Answer:</Run>
-                <Run Text="{Binding Game.Answer, Mode=OneWay}"/>
-            </TextBlock>
-            <DockPanel LastChildFill="True" TextElement.FontSize="24pt">
-                <Button DockPanel.Dock="Right" Click="Guess_Click" IsEnabled="{Binding Game.CanGuess}">
-                    Guess
-                </Button>
-                <TextBox TextAlignment="Center" MaxLength="{Binding GameSettings.WordLength}" Text="{Binding Game.CurrentGuessValue, UpdateSourceTrigger=PropertyChanged}"/>
-            </DockPanel>
-        </StackPanel>
+            </DockPanel.Style>
+            <Button DockPanel.Dock="Right" Click="Guess_Click" IsEnabled="{Binding Game.CanGuess}" IsDefault="True">
+                Guess
+            </Button>
+            <TextBox x:Name="guessTextBox" TextAlignment="Center" MaxLength="{Binding GameSettings.WordLength}"
+                         Text="{Binding Game.CurrentGuessValue, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding Game.IsInProgress}"/>
+        </DockPanel>
         <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0,10">
             <ItemsControl ItemsSource="{Binding Game.Guesses}" ItemTemplate="{StaticResource guessTemplate}"
                   HorizontalAlignment="Center" VerticalAlignment="Center">

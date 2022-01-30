@@ -46,6 +46,7 @@ namespace Wordle
         private void NewGame()
         {
             Game = new Game(GameSettings);
+            guessTextBox.Focus();
         }
 
         private void NewGame_Click(object sender, RoutedEventArgs e)
@@ -56,6 +57,7 @@ namespace Wordle
         private void Guess_Click(object sender, RoutedEventArgs e)
         {
             Game.Guess();
+            guessTextBox.Focus();
         }
     }
 }

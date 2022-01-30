@@ -21,8 +21,9 @@ namespace Wordle
 
         public string Answer { get; }
         public IEnumerable<Guess> Guesses { get; private set; }
-        public bool IsInProgress { get => !Guesses.Any(x => x.IsSubmitted && x.ToString() == Answer) && Guesses.Count(x => x.IsSubmitted) < MaxGuesses; }
-        public bool CanGuess { get => IsInProgress && Guesses.First(x => !x.IsSubmitted).IsReadyToSubmit; }
+        public bool IsWon => Guesses.Any(x => x.IsSubmitted && x.ToString() == Answer);
+        public bool IsInProgress => !IsWon && Guesses.Count(x => x.IsSubmitted) < MaxGuesses;
+        public bool CanGuess => IsInProgress && Guesses.First(x => !x.IsSubmitted).IsReadyToSubmit;
 
         public string CurrentGuessValue
         {
@@ -51,6 +52,7 @@ namespace Wordle
             OnPropertyChanged(nameof(CurrentGuessValue));
             OnPropertyChanged(nameof(CanGuess));
             OnPropertyChanged(nameof(IsInProgress));
+            OnPropertyChanged(nameof(IsWon));
         }
     }
 }
