@@ -61,6 +61,104 @@ namespace Wordle.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to the
+        ///and
+        ///was
+        ///for
+        ///with
+        ///from
+        ///his
+        ///that
+        ///also
+        ///are
+        ///which
+        ///has
+        ///born
+        ///its
+        ///first
+        ///who
+        ///new
+        ///this
+        ///one
+        ///were
+        ///american
+        ///known
+        ///district
+        ///national
+        ///united
+        ///she
+        ///after
+        ///county
+        ///their
+        ///film
+        ///two
+        ///been
+        ///world
+        ///state
+        ///states
+        ///had
+        ///school
+        ///but
+        ///university
+        ///south
+        ///football
+        ///have
+        ///during
+        ///album
+        ///city
+        ///located
+        ///may
+        ///they
+        ///other
+        ///season
+        ///her
+        ///not
+        ///family
+        ///team
+        ///part
+        ///played
+        ///north
+        ///between
+        ///most
+        ///village
+        ///league
+        ///series
+        ///released
+        ///name
+        ///all
+        ///into
+        ///when
+        ///species
+        ///time
+        ///station
+        ///member
+        ///years
+        ///used
+        ///area
+        ///only
+        ///former
+        ///second
+        ///where
+        ///over
+        ///won
+        ///list
+        ///three
+        ///music
+        ///west
+        ///river
+        ///since
+        ///more
+        ///there
+        ///war
+        ///mar [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string Lexipedia_wordlist_3_10 {
+            get {
+                return ResourceManager.GetString("Lexipedia_wordlist_3_10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to a
         ///aa
         ///aaa
