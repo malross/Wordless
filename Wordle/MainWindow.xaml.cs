@@ -55,7 +55,7 @@ namespace Wordle
 
         private void Guess_Click(object sender, RoutedEventArgs e)
         {
-
+            Game.Guess();
         }
     }
 }

@@ -21,14 +21,14 @@ namespace Wordle
 
         public string Answer { get; }
         public IEnumerable<Guess> Guesses { get; private set; }
-        public bool IsInProgress { get => !Guesses.Any(x => x.ToString() == Answer) && Guesses.Count(x => x.IsSubmitted) < MaxGuesses; }
+        public bool IsInProgress { get => !Guesses.Any(x => x.IsSubmitted && x.ToString() == Answer) && Guesses.Count(x => x.IsSubmitted) < MaxGuesses; }
         public bool CanGuess { get => IsInProgress && Guesses.First(x => !x.IsSubmitted).IsReadyToSubmit; }
 
-        public string CurrentGuess
+        public string CurrentGuessValue
         {
             get
             {
-                return IsInProgress ? Guesses.First(x => !x.IsSubmitted).ToString() : string.Empty;
+                return IsInProgress ? CurrentGuess.ToString() : string.Empty;
             }
             set
             {
@@ -36,7 +36,21 @@ namespace Wordle
                     throw new InvalidOperationException("Should not be able to guess when there's no game in progress!");
 
                 Guesses.First(x => !x.IsSubmitted).SetValue(value);
+
+                OnPropertyChanged(nameof(CanGuess));
+                OnPropertyChanged(nameof(CurrentGuessValue));
             }
+        }
+
+        private Guess CurrentGuess => Guesses.First(x => !x.IsSubmitted);
+
+        internal void Guess()
+        {
+            CurrentGuess.SubmitAndCompareToAnswer(Answer);
+
+            OnPropertyChanged(nameof(CurrentGuessValue));
+            OnPropertyChanged(nameof(CanGuess));
+            OnPropertyChanged(nameof(IsInProgress));
         }
     }
 }

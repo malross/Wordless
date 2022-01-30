@@ -14,7 +14,7 @@ namespace Wordle
 
         private WordList(string resource, string name)
         {
-            allWords = resource.Split('\n');
+            allWords = resource.Split('\n').Select(word => word.ToUpperInvariant()).ToArray();
             this.name = name;
         }
 
