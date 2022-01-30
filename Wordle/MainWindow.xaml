@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Wordle"
         xmlns:converters="clr-namespace:Wordle.Converters"
         mc:Ignorable="d"
-        Title="Wordle∞" Height="525" Width="400">
+        Title="Wordless" Height="525" Width="400">
     <Window.Resources>
         <converters:LetterStatusToBackgroundConverter x:Key="statusToBackgroundConverter"/>
         <converters:LetterStatusToForegroundConverter x:Key="statusToForegroundConverter"/>
@@ -41,8 +41,8 @@
                 <TextBlock Text="{Binding GameSettings.WordLength}"/>
                 <Button Click="NewGame_Click" Margin="20,0,0,0">New Game</Button>
             </StackPanel>
-            <TextBlock HorizontalAlignment="Center" FontFamily="Cooper Black" FontSize="48pt" Foreground="LimeGreen">
-                <Run>Wordle</Run><Run BaselineAlignment="TextTop" FontSize="36pt">∞</Run>
+            <TextBlock HorizontalAlignment="Center" FontFamily="Cooper Black" FontSize="48pt">
+                <Run Foreground="LimeGreen">Wordle</Run><Run Foreground="Gray">ss</Run>
             </TextBlock>
         </StackPanel>
         <StackPanel DockPanel.Dock="Bottom">
