@@ -10,7 +10,6 @@
     <Window.Resources>
         <converters:LetterStatusToBackgroundConverter x:Key="statusToBackgroundConverter"/>
         <converters:LetterStatusToForegroundConverter x:Key="statusToForegroundConverter"/>
-        <converters:BooleanAndConverter x:Key="booleanAndConverter"/>
         <DataTemplate x:Key="letterTemplate" DataType="local:Letter">
             <Border Background="{Binding Status, Converter={StaticResource statusToBackgroundConverter}}"
                     TextElement.Foreground="{Binding Status, Converter={StaticResource statusToForegroundConverter}}"
