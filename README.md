@@ -3,8 +3,7 @@ Clone of Wordle, for my girls to play, with a choice of word length and number o
 
 ## Things to add/fix
 
- * Test (and probably fix) the colouring of letters when some are repeated (esp. the right-letter-wrong-place ones?)
- * Congratulate the player when they win
+ * Congratulate the player when they win ("Genius!", "TODO", "TODO", "TODO", "TODO", "Phew!")
  * Add a virtual keyboard, with colouring for found & ruled out letters
  * Deny the entry of guesses that aren't in the dictionary
  * Proper screen for settings including choice of word length and dictionary to use (currently using an MIT word list)

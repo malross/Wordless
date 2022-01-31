@@ -44,12 +44,35 @@ namespace Wordle
 
         internal void SubmitAndCompareToAnswer(string answer)
         {
+            const char blankingChar = '_';
+            var answerChars = answer.ToCharArray();
+
+            // First pass: mark the correctly guessed letters and prevent other guessed letters matching them
             for (var i = 0; i < letters.Length; ++i)
             {
-                letters[i].Status =
-                    answer[i] == letters[i].Character ? LetterStatus.InRightPlace :
-                    answer.Contains(letters[i].Character) ? LetterStatus.InWrongPlace :
-                    LetterStatus.NotInWord;
+                if (letters[i].Character == answerChars[i])
+                {
+                    letters[i].Status = LetterStatus.InRightPlace;
+                    answerChars[i] = blankingChar;
+                }
+            }
+
+            // Second pass: check for any misplaced letters, marking them as accounted for too
+            for (var i = 0; i < letters.Length; ++i)
+            {
+                if (letters[i].Status == LetterStatus.InRightPlace)
+                    continue;
+
+                var correctPosition = Array.IndexOf(answerChars, letters[i].Character);
+                if (correctPosition == -1)
+                {
+                    letters[i].Status = LetterStatus.NotInWord;
+                }
+                else
+                {
+                    letters[i].Status = LetterStatus.InWrongPlace;
+                    answerChars[correctPosition] = blankingChar;
+                }
             }
 
             IsSubmitted = true;
