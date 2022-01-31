@@ -64,6 +64,26 @@
             <TextBox x:Name="guessTextBox" TextAlignment="Center" MaxLength="{Binding GameSettings.WordLength}"
                          Text="{Binding Game.CurrentGuessValue, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding Game.IsInProgress}"/>
         </DockPanel>
+        <TextBlock TextAlignment="Center" DockPanel.Dock="Bottom">
+            <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Game}" Value="{x:Null}">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Game.IsInProgress}" Value="True">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Game.IsWon}" Value="True">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+            <Run>Unlucky! 😞 The answer was:</Run>
+            <LineBreak/>
+            <Run Text="{Binding Game.Answer, Mode=OneWay}" FontFamily="Cooper Black" FontSize="24pt" Foreground="LimeGreen"/>
+        </TextBlock>
         <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0,10">
             <ItemsControl ItemsSource="{Binding Game.Guesses}" ItemTemplate="{StaticResource guessTemplate}"
                   HorizontalAlignment="Center" VerticalAlignment="Center">
